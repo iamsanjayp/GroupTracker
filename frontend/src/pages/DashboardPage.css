@@ -1,0 +1,92 @@
+.no-team-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+}
+
+.no-team-card {
+  text-align: center;
+  padding: 48px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-lg);
+  max-width: 420px;
+  animation: fadeInScale 0.3s ease-out;
+}
+
+.no-team-icon { font-size: 3rem; display: block; margin-bottom: 16px; }
+.no-team-card h2 { margin-bottom: 8px; }
+.no-team-card p { color: var(--text-secondary); margin-bottom: 24px; }
+.no-team-actions { display: flex; gap: 12px; justify-content: center; }
+
+.page-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  gap: 16px;
+  color: var(--text-secondary);
+}
+
+/* Quick Actions */
+.quick-actions {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.quick-action-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  cursor: pointer;
+  padding: 18px 20px !important;
+}
+
+.qa-icon { font-size: 1.5rem; }
+.qa-label { flex: 1; font-weight: 600; font-size: 0.9375rem; }
+.qa-arrow { color: var(--text-muted); font-size: 1.25rem; transition: transform var(--transition-fast); }
+.quick-action-card:hover .qa-arrow { transform: translateX(4px); color: var(--accent); }
+
+/* Admin section */
+.admin-section {
+  margin-top: 32px;
+  padding-top: 32px;
+  border-top: 1px solid var(--border);
+}
+
+/* Leaderboard */
+.leaderboard-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.leaderboard-table th {
+  text-align: left;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--border);
+}
+
+.leaderboard-table td {
+  padding: 12px;
+  font-size: 0.875rem;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.leaderboard-table tr:last-child td { border-bottom: none; }
+.leaderboard-table tr:hover td { background: var(--bg-secondary); }
+.leaderboard-table .top-3 td { font-weight: 600; }
+
+.lb-name { font-weight: 600; color: var(--text-primary); }
+.lb-total { font-weight: 700; color: var(--accent); }
+
+.rank { font-size: 1rem; }

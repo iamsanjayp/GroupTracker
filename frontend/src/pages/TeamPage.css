@@ -1,0 +1,110 @@
+.team-setup-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+  max-width: 600px;
+}
+
+.team-setup-card {
+  text-align: center;
+  cursor: pointer;
+  padding: 40px 24px !important;
+}
+
+.setup-icon { font-size: 3rem; display: block; margin-bottom: 16px; }
+.team-setup-card h3 { margin-bottom: 8px; }
+.team-setup-card p { color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 16px; }
+
+/* Invite Card */
+.invite-card { margin-bottom: 28px; }
+
+.invite-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.invite-code-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.invite-code {
+  padding: 10px 20px;
+  background: var(--bg-secondary);
+  border: 1px dashed var(--border);
+  border-radius: var(--radius-md);
+  font-size: 1.125rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  color: var(--accent);
+  font-family: 'Courier New', monospace;
+}
+
+/* Member List */
+.member-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.member-row {
+  display: flex !important;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 20px !important;
+}
+
+.member-row-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.member-row-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-full);
+  background: linear-gradient(135deg, var(--accent), #818CF8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 700;
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
+.member-row-info { display: flex; flex-direction: column; }
+.member-row-name { font-weight: 600; font-size: 0.9375rem; display: flex; align-items: center; gap: 8px; }
+.member-row-email { font-size: 0.75rem; color: var(--text-muted); }
+
+.you-badge {
+  font-size: 0.625rem;
+  background: var(--accent-light);
+  color: var(--accent);
+  padding: 1px 6px;
+  border-radius: var(--radius-full);
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.member-row-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.member-actions {
+  display: flex;
+  gap: 4px;
+}
+
+@media (max-width: 768px) {
+  .team-setup-grid { grid-template-columns: 1fr; }
+  .invite-content { flex-direction: column; align-items: flex-start; }
+  .member-row { flex-direction: column; align-items: flex-start; gap: 12px; }
+  .member-row-right { width: 100%; justify-content: flex-end; }
+}

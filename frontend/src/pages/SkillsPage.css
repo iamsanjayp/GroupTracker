@@ -1,0 +1,170 @@
+.skills-page {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1rem;
+}
+
+.skill-category-card {
+  padding: 1.5rem !important;
+}
+
+.skill-cat-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 1rem;
+}
+
+.skill-cat-emoji {
+  font-size: 2rem;
+}
+
+.skill-cat-header h3 {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.skill-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.skill-tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+.skill-tag-primary {
+  background: rgba(108, 92, 231, 0.15);
+  color: var(--primary);
+  border: 1px solid rgba(108, 92, 231, 0.25);
+}
+
+.skill-tag-secondary {
+  background: rgba(9, 132, 227, 0.15);
+  color: var(--info, #0984e3);
+  border: 1px solid rgba(9, 132, 227, 0.25);
+}
+
+.skill-tag-special {
+  background: rgba(0, 184, 148, 0.15);
+  color: var(--success);
+  border: 1px solid rgba(0, 184, 148, 0.25);
+}
+
+/* Team Skills */
+.team-skills-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.team-skill-row {
+  padding: 1.25rem !important;
+}
+
+.team-skill-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.team-skill-tags {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.team-skill-cat {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.skill-tags-inline {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+/* Selection Modal */
+.skill-selection-modal {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.skill-selection-group {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 1.25rem;
+  background: var(--surface-hover, rgba(255,255,255,0.02));
+}
+
+.skill-selection-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 4px;
+}
+
+.skill-selection-header h4 {
+  margin: 0;
+}
+
+.skill-option-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.skill-option {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border-radius: 20px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.skill-option:hover:not(.disabled) {
+  border-color: var(--primary);
+  background: rgba(108, 92, 231, 0.05);
+}
+
+.skill-option.selected {
+  background: var(--primary);
+  color: white;
+  border-color: var(--primary);
+}
+
+.skill-option.disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.skill-check {
+  font-size: 0.75rem;
+  font-weight: 700;
+}

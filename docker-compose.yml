@@ -1,0 +1,45 @@
+version: '3.8'
+
+services:
+  db:
+    image: mysql:8
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: Positron@27
+      MYSQL_DATABASE: grouptracker
+    ports:
+      - "3309:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+      # This mount triggers MySQL to execute all these SQL schemas automatically on first initialization
+      - ./backend/internal/database/migrations:/docker-entrypoint-initdb.d
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    ports:
+      - "8084:8080"
+    env_file:
+      - ./backend/.env
+    environment:
+      - DB_HOST=db
+      - DB_PASSWORD=Positron@27
+      - FRONTEND_URL=http://192.168.29.125
+      - GOOGLE_REDIRECT_URL=http://192.168.29.125/api/auth/google/callback
+    depends_on:
+      - db
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    ports:
+      - "5555:80"
+    depends_on:
+      - backend
+
+volumes:
+  db_data:

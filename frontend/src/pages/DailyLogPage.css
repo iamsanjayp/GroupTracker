@@ -1,0 +1,180 @@
+/* Date Picker */
+.date-picker {
+  padding: 10px 16px;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-md);
+  font-family: var(--font-family);
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  background: var(--bg-card);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.date-picker:focus {
+  border-color: var(--border-focus);
+  box-shadow: 0 0 0 3px var(--accent-glow);
+  outline: none;
+}
+
+.log-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Summary Bar */
+.log-summary {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 16px 24px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  margin-bottom: 24px;
+  box-shadow: var(--shadow-card);
+}
+
+.log-summary-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.log-summary-icon { font-size: 1.5rem; }
+
+.log-summary-value {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  display: block;
+  line-height: 1.2;
+}
+
+.log-summary-label {
+  font-size: 0.6875rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+.log-summary-save { margin-left: auto; }
+
+/* Hour Grid */
+.hour-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.hour-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 20px;
+  background: var(--bg-card);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-lg);
+  transition: all var(--transition-base);
+  animation: fadeIn var(--transition-base) ease-out backwards;
+}
+
+.hour-row:hover {
+  border-color: var(--accent-light);
+  box-shadow: var(--shadow-md);
+}
+
+.hour-filled {
+  border-color: var(--accent);
+  border-left: 4px solid var(--accent);
+  background: linear-gradient(90deg, var(--accent-light), var(--bg-card) 20%);
+}
+
+.hour-saved {
+  border-color: var(--success);
+  border-left-color: var(--success);
+  background: linear-gradient(90deg, var(--success-light), var(--bg-card) 20%);
+}
+
+.hour-number {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 120px;
+}
+
+.hour-slot {
+  width: 32px;
+  height: 32px;
+  background: var(--bg-secondary);
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+}
+
+.hour-filled .hour-slot {
+  background: var(--accent);
+  color: white;
+}
+
+.hour-saved .hour-slot {
+  background: var(--success);
+  color: white;
+}
+
+.hour-label {
+  font-size: 0.6875rem;
+  color: var(--text-muted);
+  margin-top: 4px;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.hour-fields {
+  flex: 1;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.hour-type { width: 200px; flex-shrink: 0; }
+.hour-desc { flex: 1; }
+
+.hour-points { width: 80px; flex-shrink: 0; }
+
+.hour-reward { width: 90px; flex-shrink: 0; }
+
+.points-input {
+  text-align: center;
+  font-weight: 700;
+}
+
+.reward-input {
+  border-color: var(--warning);
+  background: var(--warning-light);
+}
+
+.reward-input:focus {
+  border-color: var(--warning);
+  box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.15);
+}
+
+.hour-badge {
+  flex-shrink: 0;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .hour-row { flex-direction: column; align-items: stretch; gap: 10px; }
+  .hour-number { flex-direction: row; gap: 10px; min-width: auto; }
+  .hour-fields { flex-direction: column; }
+  .hour-type, .hour-points { width: 100%; }
+  .log-summary { flex-wrap: wrap; gap: 16px; }
+}
