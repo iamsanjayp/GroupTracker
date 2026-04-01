@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   db:
-    image: mysql:8
+    image: mysql:5.7
     restart: unless-stopped
     environment:
       MYSQL_ROOT_PASSWORD: Positron@27
@@ -11,7 +11,6 @@ services:
       - "3309:3306"
     volumes:
       - db_data:/var/lib/mysql
-      # This mount triggers MySQL to execute all these SQL schemas automatically on first initialization
       - ./backend/internal/database/migrations:/docker-entrypoint-initdb.d
 
   backend:

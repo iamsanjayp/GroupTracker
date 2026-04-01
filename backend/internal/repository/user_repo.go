@@ -19,9 +19,9 @@ func NewUserRepo(db *sql.DB) *UserRepo {
 
 func (r *UserRepo) Create(user *models.User) (uint64, error) {
 	res, err := r.db.Exec(
-		`INSERT INTO users (email, name, password_hash, avatar_url, google_id, team_id, role, roll_no, join_status)
-		 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
-		user.Email, user.Name, user.PasswordHash, user.AvatarURL, user.GoogleID, user.TeamID, user.Role, user.RollNo, user.JoinStatus,
+		`INSERT INTO users (email, name, password_hash, avatar_url, team_id, role, roll_no, join_status)
+		 VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
+		user.Email, user.Name, user.PasswordHash, user.AvatarURL, user.TeamID, user.Role, user.RollNo, user.JoinStatus,
 	)
 	if err != nil {
 		return 0, err
@@ -33,10 +33,10 @@ func (r *UserRepo) Create(user *models.User) (uint64, error) {
 func (r *UserRepo) FindByEmail(email string) (*models.User, error) {
 	user := &models.User{}
 	err := r.db.QueryRow(
-		`SELECT id, email, name, password_hash, avatar_url, google_id, team_id, role, is_active, roll_no, join_status, created_at, updated_at
+		`SELECT id, email, name, password_hash, avatar_url, team_id, role, is_active, roll_no, join_status, created_at, updated_at
 		 FROM users WHERE email = ?`, email,
 	).Scan(&user.ID, &user.Email, &user.Name, &user.PasswordHash, &user.AvatarURL,
-		&user.GoogleID, &user.TeamID, &user.Role, &user.IsActive, &user.RollNo, &user.JoinStatus, &user.CreatedAt, &user.UpdatedAt)
+		&user.TeamID, &user.Role, &user.IsActive, &user.RollNo, &user.JoinStatus, &user.CreatedAt, &user.UpdatedAt)
 	if err != nil {
 		return nil, err
 	}
@@ -46,28 +46,17 @@ func (r *UserRepo) FindByEmail(email string) (*models.User, error) {
 func (r *UserRepo) FindByID(id uint64) (*models.User, error) {
 	user := &models.User{}
 	err := r.db.QueryRow(
-		`SELECT id, email, name, password_hash, avatar_url, google_id, team_id, role, is_active, roll_no, join_status, created_at, updated_at
+		`SELECT id, email, name, password_hash, avatar_url, team_id, role, is_active, roll_no, join_status, created_at, updated_at
 		 FROM users WHERE id = ?`, id,
 	).Scan(&user.ID, &user.Email, &user.Name, &user.PasswordHash, &user.AvatarURL,
-		&user.GoogleID, &user.TeamID, &user.Role, &user.IsActive, &user.RollNo, &user.JoinStatus, &user.CreatedAt, &user.UpdatedAt)
+		&user.TeamID, &user.Role, &user.IsActive, &user.RollNo, &user.JoinStatus, &user.CreatedAt, &user.UpdatedAt)
 	if err != nil {
 		return nil, err
 	}
 	return user, nil
 }
 
-func (r *UserRepo) FindByGoogleID(googleID string) (*models.User, error) {
-	user := &models.User{}
-	err := r.db.QueryRow(
-		`SELECT id, email, name, password_hash, avatar_url, google_id, team_id, role, is_active, roll_no, join_status, created_at, updated_at
-		 FROM users WHERE google_id = ?`, googleID,
-	).Scan(&user.ID, &user.Email, &user.Name, &user.PasswordHash, &user.AvatarURL,
-		&user.GoogleID, &user.TeamID, &user.Role, &user.IsActive, &user.RollNo, &user.JoinStatus, &user.CreatedAt, &user.UpdatedAt)
-	if err != nil {
-		return nil, err
-	}
-	return user, nil
-}
+
 
 func (r *UserRepo) UpdateTeamAndRole(userID, teamID uint64, role string, joinStatus string) error {
 	_, err := r.db.Exec(

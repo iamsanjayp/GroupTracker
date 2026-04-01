@@ -8,7 +8,6 @@ type User struct {
 	Name         string    `json:"name"`
 	PasswordHash string    `json:"-"`
 	AvatarURL    *string   `json:"avatar_url"`
-	GoogleID     *string   `json:"-"`
 	TeamID       *uint64   `json:"team_id"`
 	Role         string    `json:"role"`
 	IsActive     bool      `json:"is_active"`
@@ -61,10 +60,6 @@ type RegisterRequest struct {
 type LoginRequest struct {
 	Email    string `json:"email"`
 	Password string `json:"password"`
-}
-
-type GoogleAuthRequest struct {
-	Code string `json:"code"`
 }
 
 type AuthResponse struct {

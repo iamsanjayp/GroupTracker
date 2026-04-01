@@ -17,9 +17,6 @@ type Config struct {
 	JWTSecret        string
 	JWTAccessExpiry  time.Duration
 	JWTRefreshExpiry time.Duration
-	GoogleClientID   string
-	GoogleSecret     string
-	GoogleRedirectURL string
 	FrontendURL      string
 }
 
@@ -39,9 +36,6 @@ func Load() *Config {
 		JWTSecret:        getEnv("JWT_SECRET", "default-secret-change-me"),
 		JWTAccessExpiry:  accessExp,
 		JWTRefreshExpiry: refreshExp,
-		GoogleClientID:   getEnv("GOOGLE_CLIENT_ID", ""),
-		GoogleSecret:     getEnv("GOOGLE_CLIENT_SECRET", ""),
-		GoogleRedirectURL: getEnv("GOOGLE_REDIRECT_URL", "http://localhost:8080/api/auth/google/callback"),
 		FrontendURL:      getEnv("FRONTEND_URL", "http://localhost:5173"),
 	}
 }
