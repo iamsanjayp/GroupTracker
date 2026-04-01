@@ -26,10 +26,10 @@ services:
     environment:
       - DB_HOST=db
       - DB_PASSWORD=Positron@27
-      - FRONTEND_URL=https://bitpbl.voidprojects.in/
-      - GOOGLE_REDIRECT_URL=https://bitpbl.voidprojects.in/api/auth/google/callback
-      - FRONTEND_URL=https://voidprojects.in/
-      - GOOGLE_REDIRECT_URL=https://voidprojects.in/api/auth/google/callback
+      - FRONTEND_URL=${FRONTEND_URL}
+      - GOOGLE_REDIRECT_URL=${GOOGLE_REDIRECT_URL}
+      - GOOGLE_CLIENT_ID=${GOOGLE_CLIENT_ID}
+      - GOOGLE_CLIENT_SECRET=${GOOGLE_CLIENT_SECRET}
     depends_on:
       - db
 
