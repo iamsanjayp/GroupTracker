@@ -26,8 +26,8 @@ services:
     environment:
       - DB_HOST=db
       - DB_PASSWORD=Positron@27
-      - FRONTEND_URL=http://192.168.29.125
-      - GOOGLE_REDIRECT_URL=http://192.168.29.125/api/auth/google/callback
+      - FRONTEND_URL=http://192.168.29.74
+      - GOOGLE_REDIRECT_URL=http://192.168.29.74/api/auth/google/callback
     depends_on:
       - db
 
