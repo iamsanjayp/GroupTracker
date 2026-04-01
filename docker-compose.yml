@@ -26,10 +26,6 @@ services:
     environment:
       - DB_HOST=db
       - DB_PASSWORD=Positron@27
-      - FRONTEND_URL=${FRONTEND_URL}
-      - GOOGLE_REDIRECT_URL=${GOOGLE_REDIRECT_URL}
-      - GOOGLE_CLIENT_ID=${GOOGLE_CLIENT_ID}
-      - GOOGLE_CLIENT_SECRET=${GOOGLE_CLIENT_SECRET}
     depends_on:
       - db
 
