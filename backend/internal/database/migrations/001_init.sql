@@ -1,5 +1,5 @@
 -- GroupTracker Database Schema
--- Phase 1: Full initialization
+-- Optimized for MySQL 5.7 compatibility
 
 CREATE DATABASE IF NOT EXISTS grouptracker;
 USE grouptracker;
@@ -24,16 +24,16 @@ CREATE TABLE IF NOT EXISTS users (
     name          VARCHAR(100) NOT NULL,
     password_hash VARCHAR(255),
     avatar_url    VARCHAR(500),
-    google_id     VARCHAR(100),
     team_id       BIGINT UNSIGNED,
     role          ENUM('captain','vice_captain','manager','strategist','member') DEFAULT 'member',
     is_active     BOOLEAN DEFAULT TRUE,
+    roll_no       VARCHAR(50),
+    join_status   ENUM('pending', 'approved') DEFAULT 'approved',
     created_at    TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at    TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     FOREIGN KEY (team_id) REFERENCES teams(id) ON DELETE SET NULL,
     INDEX idx_users_team (team_id),
-    INDEX idx_users_email (email),
-    INDEX idx_users_google (google_id)
+    INDEX idx_users_email (email)
 ) ENGINE=InnoDB;
 
 -- ============================================
@@ -55,7 +55,7 @@ CREATE TABLE IF NOT EXISTS refresh_tokens (
 CREATE TABLE IF NOT EXISTS skills (
     id       BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     name     VARCHAR(100) NOT NULL,
-    category ENUM('primary','secondary','special','non_ps') NOT NULL,
+    category ENUM('primary','secondary','special') NOT NULL,
     team_id  BIGINT UNSIGNED NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (team_id) REFERENCES teams(id) ON DELETE CASCADE,
@@ -178,17 +178,50 @@ CREATE TABLE IF NOT EXISTS ps_records (
 ) ENGINE=InnoDB;
 
 -- ============================================
--- POINTS (Aggregated)
+-- POINTS (LEADERBOARD)
 -- ============================================
 CREATE TABLE IF NOT EXISTS points (
-    id              BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    user_id         BIGINT UNSIGNED NOT NULL,
-    team_id         BIGINT UNSIGNED NOT NULL,
-    total_activity  DECIMAL(10,2) DEFAULT 0.00,
-    total_reward    DECIMAL(10,2) DEFAULT 0.00,
-    updated_at      TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    id             BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    user_id        BIGINT UNSIGNED NOT NULL,
+    team_id        BIGINT UNSIGNED NOT NULL,
+    total_activity DECIMAL(10,2) DEFAULT 0.00,
+    total_reward   DECIMAL(10,2) DEFAULT 0.00,
+    updated_at     TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
     FOREIGN KEY (team_id) REFERENCES teams(id) ON DELETE CASCADE,
-    UNIQUE KEY uniq_user_points (user_id),
-    INDEX idx_points_team (team_id)
+    UNIQUE KEY uniq_user_team (user_id, team_id)
+) ENGINE=InnoDB;
+
+-- ============================================
+-- ATTENDANCES
+-- ============================================
+CREATE TABLE IF NOT EXISTS attendances (
+    id          BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    team_id     BIGINT UNSIGNED NOT NULL,
+    user_id     BIGINT UNSIGNED NOT NULL,
+    date        DATE NOT NULL,
+    hour_slot   TINYINT NOT NULL,
+    status      ENUM('Present', 'Absent', 'PS Slot', 'Event', 'OnDuty', 'Class') NOT NULL DEFAULT 'Present',
+    created_at  TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at  TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (team_id) REFERENCES teams(id) ON DELETE CASCADE,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+    UNIQUE KEY uniq_attendance (team_id, date, hour_slot, user_id),
+    INDEX idx_attendance_team_date (team_id, date)
+) ENGINE=InnoDB;
+
+-- ============================================
+-- MISSED ATTENDANCES (OTP)
+-- ============================================
+CREATE TABLE IF NOT EXISTS missed_attendances (
+    id          BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    team_id     BIGINT UNSIGNED NOT NULL,
+    user_id     BIGINT UNSIGNED NOT NULL,
+    date        DATE NOT NULL,
+    hour_slot   TINYINT NOT NULL,
+    created_at  TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (team_id) REFERENCES teams(id) ON DELETE CASCADE,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+    UNIQUE KEY uniq_missed_attendance (user_id, date, hour_slot),
+    INDEX idx_missed_team_date (team_id, date)
 ) ENGINE=InnoDB;
